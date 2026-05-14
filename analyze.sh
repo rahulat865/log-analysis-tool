@@ -1,6 +1,24 @@
 
 #!/bin/bash
 
+
+LOG_FILE=$1
+
+if [ -z "$LOG_FILE" ]; then
+    echo "Usage: ./analyze.sh <log_file>"
+    exit 1
+fi
+
+if [ ! -f "$LOG_FILE" ]; then
+    echo "Error: File not found."
+    exit 1
+fi
+
+if [ ! -s "$LOG_FILE" ]; then
+    echo "Error: File is empty."
+    exit 1
+fi
+
 LOG_FILE="../logs/access.log"
 
 echo "=============================="
@@ -57,3 +75,5 @@ for code in "${!status_count[@]}"
  do
     echo "$code -> ${status_count[$code]} occurrences"
  done
+
+ 
